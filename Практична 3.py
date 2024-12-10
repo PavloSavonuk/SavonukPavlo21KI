@@ -1,30 +1,20 @@
 dictionary = {
-    "ім'я": "Паша",
-    "вік": 16,
-    "контактна інформація": {
-        "електронна пошта": "pavel@gmail.com",
-        "номер телефону": "05066678476",
-        "місто": "Луцьк",
-        "поштовий індекс": "65000",
-        "країна": "Україна"
-    },
-    "студент": False
+    'name': 'Savonuk',
+    'age': 16,
+    'dict': {'1': 'toplik',
+             '2': 'Hello world',
+             '3': 2545,
+             '4': False,
+             '5': True},
+    'python': 'pitun',
 }
-
-# Словник з типами даних
-types_dictionary = {
-    "ім'я": str,
-    "вік": int,
-    "контактна інформація": {
-        "електронна пошта": str,
-        "номер телефону": str,
-        "місто": str,
-        "поштовий індекс": str,
-        "країна": str
-    },
-    "студент": bool
-}
-
 print(dictionary)
-print(types_dictionary)
-print("найчастіший тип данних str")
+
+type_dict = {}
+for key, value in dictionary.items():
+    if type(value) == dict:
+        for key1, value1 in value.items():
+            type_dict[key1] = type(value1)
+    else:
+        type_dict[key] = type(value)
+print(type_dict)
