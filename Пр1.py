@@ -1,24 +1,21 @@
-class ПавлоСавонюк:
-    def __init__(self, ім_я=None, призвище=None, рік_народження=None):
-        self.ім_я = ім_я if ім_я is not None else 'Павло'
-        self.призвище = призвище if призвище is not None else 'Савонюк'
-        self.рік_народження = рік_народження if рік_народження is not None else 2008
+class Osnova:
+    def __init__(self, name=None, last_name=None, birth_year=None):
+        self.name = name
+        self.last_name = last_name
+        self.birth_year = birth_year
 
-    def вирахувати_курс(self):
-        # Вираховуємо курс, взявши за основу рік народження
-        current_year = 2025  # Поточний рік
-        age = current_year - self.рік_народження
-        # Для прикладу, якщо курс - це вік на поточний рік
-        return age
+    def rozrahynok_age(self, current_year):
+        if self.birth_year is None:
+            return None
+        return current_year - self.birth_year
 
-    def створити_список(self):
-        # Створюємо список з іменем та призвищем
-        return [self.ім_я, self.призвище]
+    def full_name(self):
+        return f"{self.name} {self.last_name}" if self.name and self.last_name else None
 
-людина = ПавлоСавонюк()
-# Перевірка методу для вирахування курсу (вік)
-вік = людина.вирахувати_курс()
-print(f"Вік: {вік}")  # Має вивести 17 (2025 - 2008)
-# Перевірка методу для створення списку
-список = людина.створити_список()
-print(f"Список: {список}")  # Має вивести ['Павло', 'Савонюк']
+person = Osnova("Савонюк", "Павло", 2008)
+
+print("Вас звуть: ", person.full_name())   
+print("Ваш вік: ", person.rozrahynok_age(2025))  
+person_default = Osnova()
+print(person_default.rozrahynok_age(2025))  
+print(person_default.full_name())
