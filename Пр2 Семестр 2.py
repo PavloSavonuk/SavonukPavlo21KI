@@ -1,69 +1,45 @@
-class ПавлоСавонюк:
-    def __init__(self, ім_я=None, призвище=None, рік_народження=None):
-        self.ім_я = ім_я if ім_я is not None else 'Павло'
-        self.призвище = призвище if призвище is not None else 'Савонюк'
-        self.рік_народження = рік_народження if рік_народження is not None else 2008
+class PavloSavonuk:
+    def __init__(self, first_name=None, last_name=None, birth_year=None):
+        self.first_name = first_name if first_name is not None else 'Павло'
+        self.last_name = last_name if last_name is not None else 'Савонюк'
+        self.birth_year = birth_year if birth_year is not None else 2008
 
-    def вирахувати_курс(self):
-        # Вираховуємо курс, взявши за основу рік народження
-        current_year = 2025  # Поточний рік
-        age = current_year - self.рік_народження
-        # Для прикладу, якщо курс - це вік на поточний рік
-        return age
+    def calculate_course(self):
+        current_year = 2025
+        course = current_year - self.birth_year
+        return f"Курс відповідно до року народження: {course} років"
 
-    def створити_список(self):
-        # Створюємо список з іменем та призвищем
-        return [self.ім_я, self.призвище]
+    def create_name_list(self):
+        name_list = [self.first_name, self.last_name]
+        return name_list
 
-людина = ПавлоСавонюк()
-# Перевірка методу для вирахування курсу (вік)
-вік = людина.вирахувати_курс()
-print(f"Вік: {вік}")  # Має вивести 17 (2025 - 2008)
-# Перевірка методу для створення списку
-список = людина.створити_список()
-print(f"Список: {список}")  # Має вивести ['Павло', 'Савонюк']
 
-# Дочірній клас
-class Студент(ПавлоСавонюк):
-    def __init__(self, ім_я=None, призвище=None, рік_народження=None, спеціальність=None, коледж=None, середній_бал=None):
-        super().__init__(ім_я, призвище, рік_народження)
-        self.спеціальність = спеціальність if спеціальність is not None else 'Комп_ютерна інженерія'
-        self.коледж = коледж if коледж is not None else 'ТФК ЛНТУ'
-        self.середній_бал = середній_бал if середній_бал is not None else 4.5
-        self._підготовка = "Середній рівень"  # захищений атрибут
-        self.__студент_код = 123456  # приватний атрибут
+class AdvancedPavlo(PavloSavonuk):
+    def __init__(self, first_name=None, last_name=None, birth_year=None,
+                 hobby=None, city=None, college=None):
+        super().__init__(first_name, last_name, birth_year)
+        self.hobby = hobby if hobby is not None else 'Плавання'
+        self.city = city if city is not None else 'Луцьк'
+        self.college = college if college is not None else 'Коледж ТФК ЛНТУ'
 
-    def _змінити_підготовку(self, новий_рівень):
-        # Захищений метод для зміни рівня підготовки
-        self._підготовка = новий_рівень
+    def display_full_profile(self):
+        profile = (f"Ім'я: {self.first_name}, Прізвище: {self.last_name}, "
+                   f"Рік народження: {self.birth_year}, Хобі: {self.hobby}, "
+                   f"Місто: {self.city}, Коледж: {self.college}")
+        return profile
 
-    def __приватний_метод(self):
-        # Приватний метод, що працює з приватним атрибутом
-        return f"Код студента: {self.__студент_код}"
+    def _protected_method(self):
+        return f"{self.first_name} захоплюється {self.hobby}."
 
-    def вивести_студентські_дані(self):
-        # Публічний метод для виведення студентських даних
-        return f"Студент {self.ім_я} {self.призвище}, спеціальність: {self.спеціальність}, коледж: {self.коледж}, середній бал: {self.середній_бал}"
+    def __private_method(self):
+        return f"Це приватне повідомлення для {self.first_name} {self.last_name}."
 
-    def змінити_середній_бал(self, новий_бал):
-        # Публічний метод для зміни середнього балу
-        if 0 <= новий_бал <= 5:
-            self.середній_бал = новий_бал
-        else:
-            print("Невірний середній бал!")
+    def reveal_private_message(self):
+        return self.__private_method()
 
-# Приклад використання:
 
-# Створення об'єкта дочірнього класу
-студент = Студент(ім_я='Павло', призвище='Савонюк', рік_народження=2008)
-
-# Виведення студентських даних
-print(студент.вивести_студентські_дані())
-
-# Зміна середнього балу
-студент.змінити_середній_бал(4.8)
-print(f"Новий середній бал: {студент.середній_бал}")
-
-# Використання захищеного методу для зміни рівня підготовки
-студент._змінити_підготовку("Високий рівень")
-print(f"Рівень підготовки: {студент._підготовка}")
+# Тестуємо
+adv_pavlo = AdvancedPavlo()
+print(adv_pavlo.display_full_profile())
+print(adv_pavlo._protected_method())
+print(adv_pavlo.reveal_private_message())
